@@ -1,6 +1,7 @@
 default:	all
 .PHONY: clean
 include $(ROOT)/Makefile_templates/*_rule/Makefile
+#include *_rule/Makefile
 
 # Original files
 FIGs := $(wildcard *.fig)
