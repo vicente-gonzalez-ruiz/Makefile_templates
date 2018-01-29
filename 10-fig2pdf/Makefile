@@ -1,6 +1,3 @@
-default: all
-.PHONY: clean
-
 %.pdf: %.fig
 	fig2dev -L pstex $*.fig > tmp.eps
 	fig2dev -L pstex_t -f sf -p tmp.eps $< > tmp.tex
@@ -34,8 +31,3 @@ FIGs := $(wildcard *.fig)
 
 # Temporal files
 TMPs += $(FIGs:%.fig=%.pdf)
-
-all:	$(TMPs)
-
-clean:
-	rm -f $(TMPs)
