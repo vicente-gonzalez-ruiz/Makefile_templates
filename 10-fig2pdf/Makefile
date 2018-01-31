@@ -25,6 +25,7 @@ EOF
 	rm tmp.tex
 	rm a0poster.aux
 	rm a0poster.log
+	rm a0header.ps
 
 # Original files
 FIGs := $(wildcard *.fig)
