@@ -1,5 +1,5 @@
 default:	all
-.PHONY: clean
+.PHONY: clean all mrproper
 #include $(ROOT)/Makefile_templates/*_rule/Makefile
 #include *_rule/Makefile
 include $(HOME)/Makefile_templates/*_rule/Makefile
@@ -37,7 +37,6 @@ TMPs += $(TFIGs)
 
 PNGs += $(EPSs:%.eps=%.png)
 TARs += $(PNGs)
-
 
 all:	$(TMPs) $(TARs)
 
