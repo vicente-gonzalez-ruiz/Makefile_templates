@@ -41,7 +41,7 @@ TARs += $(PNGs)
 all:	$(TMPs) $(TARs)
 
 clean:
-	rm -f $(TMPs)
+	rm -f $(TMPs) *.log *.aux
 
 mrproper:
 	rm -f $(TMPs) $(TARs)
