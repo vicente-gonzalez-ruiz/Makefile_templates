@@ -44,10 +44,12 @@ clean:
 	rm -f $(TMPs) *.log *.aux
 
 mrproper:
-	rm -f $(TMPs) $(TARs)
+	rm -f $(TMPs) $(TARs) *.log *.aux
 
 info:
 	@echo Original files: $(FIGs) $(TEXs) $(GPTs)
+	@echo ---------------------------------------------
 	@echo Temporal files: $(TMPs)
+	@echo ---------------------------------------------
 	@echo Target files: $(TARs)
 
