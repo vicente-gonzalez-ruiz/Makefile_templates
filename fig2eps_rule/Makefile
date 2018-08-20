@@ -8,6 +8,7 @@
 \\usepackage{amsmath} \
 \\usepackage{amssymb} \
 \\usepackage{color} \
+\\input{local_packages} \
 \\begin{document} \
 \\sffamily \
 \\def\\normalfont{\\sffamily} \
