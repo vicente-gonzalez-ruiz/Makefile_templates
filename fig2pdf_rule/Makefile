@@ -1,8 +1,8 @@
 %.pdf: %.fig
-	fig2dev -L pdftex $*.fig > $*_tmp.pdf
-	fig2dev -L pdftex_t -f sf -p $*_tmp.pdf $< > $*.tex
-	pdflatex -jobname $* << EOF \
-\\documentclass[portrait,a3,final]{a0poster} \
+	fig2dev -L pdftex $*.fig > $*_fig2dev.pdf
+	fig2dev -L pdftex_t -f sf -p $*_fig2dev.pdf $< > $*_fig2dev.tex
+	pdflatex -jobname $*_tmp << EOF \
+\\documentclass[portrait,a2,final]{a0poster} \
 \\usepackage{epsfig} \
 \\usepackage{amsmath} \
 \\usepackage{amssymb} \
@@ -14,14 +14,16 @@
 \\renewcommand{\\familydefault}{cmss} \
 \\pagestyle{empty} \
 \\thispagestyle{empty} \
-\\input{$*} \
+\\input{$*_fig2dev} \
 \\end{document} \
 EOF
 	#mv a0poster.pdf $*.pdf
+	pdfcrop $*_tmp.pdf $*.pdf
+	rm $*_fig2dev.pdf
+	rm $*_fig2dev.tex
 	rm $*_tmp.pdf
-	rm $*.tex
-	rm $*.aux
-	rm $*.log
+	rm $*_tmp.aux
+	rm $*_tmp.log
 	#mv a0poster.dvi $*.dvi
 	#dvips $*.dvi -o $*.ps
 	#ps2eps --loose < $*.ps > /tmp/$*.eps
