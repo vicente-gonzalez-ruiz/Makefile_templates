@@ -1,7 +1,7 @@
 %.pdf: %.fig
-	fig2dev -L pstex $*.fig > $*_fig2dev.eps
-	fig2dev -L pstex_t -f sf -p $*_fig2dev.eps $< > $*_fig2dev.tex
-	latex  -halt-on-error -output-directory /tmp -jobname $* << EOF \
+	fig2dev -L pdftex $*.fig > /tmp/$*.pdf
+	fig2dev -L pdftex_t -f sf -p /tmp/$*.pdf $< > /tmp/$*.tex
+	pdflatex  -halt-on-error -output-directory /tmp -jobname $*_raw << EOF \
 \\documentclass[portrait,a2,final]{a0poster} \
 \\usepackage{epsfig} \
 \\usepackage{amsmath} \
@@ -14,10 +14,11 @@
 \\renewcommand{\\familydefault}{cmss} \
 \\pagestyle{empty} \
 \\thispagestyle{empty} \
-\\input{$*_fig2dev} \
+\\input{/tmp/$*} \
 \\end{document} \
 EOF
-	dvips /tmp/$*.dvi -o /tmp/$*.ps
-	ps2eps --loose < /tmp/$*.ps > /tmp/$*.eps
-	epstopdf /tmp/$*.eps
-	mv /tmp/$*.pdf $*.pdf
+	pdfcrop /tmp/$*_raw.pdf /tmp/$*_crop.pdf
+	#dvips /tmp/$*.dvi -o /tmp/$*.ps
+	#ps2eps --loose < /tmp/$*.ps > /tmp/$*.eps
+	#epstopdf /tmp/$*.eps
+	mv /tmp/$*_crop.pdf $*.pdf
