@@ -1,10 +1,10 @@
 %.pdf: %.tex
-	echo -e "Default \e[92mCompiling $*\e[0m"
-	pdflatex -jobname $*_ $*
-	pdfcrop $*_.pdf $*.pdf
-	rm $*_.pdf
-	rm $*_.aux
-	rm $*_.log
+	@echo -e "\e[92mCompiling $*.tex\e[0m"
+	pdflatex -halt-on-error -output-directory /tmp -jobname $*_raw $* > /tmp/$*.log
+	pdfcrop /tmp/$*_raw.pdf $*.pdf >> /tmp/$*.log
+	rm /tmp/$*_raw.pdf
+	rm /tmp/$*_raw.aux
+	rm /tmp/$*_raw.log
 
 #TEXs := $(wildcard *.tex)
 

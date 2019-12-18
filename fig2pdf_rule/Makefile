@@ -1,4 +1,5 @@
 %.pdf: %.fig
+	@echo -e "\e[92mCompiling $*.fig\e[0m"
 	fig2dev -L pdftex $*.fig > /tmp/$*.pdf
 	fig2dev -L pdftex_t -f sf -p /tmp/$*.pdf $< > /tmp/$*.tex
 	pdflatex  -halt-on-error -output-directory /tmp -jobname $*_raw << EOF \
@@ -16,8 +17,8 @@
 \\thispagestyle{empty} \
 \\input{/tmp/$*} \
 \\end{document} \
-EOF
-	pdfcrop /tmp/$*_raw.pdf /tmp/$*_crop.pdf
+EOF > /tmp/$*_raw.log
+	pdfcrop /tmp/$*_raw.pdf /tmp/$*_crop.pdf >> /tmp/$*_raw.log
 	#dvips /tmp/$*.dvi -o /tmp/$*.ps
 	#ps2eps --loose < /tmp/$*.ps > /tmp/$*.eps
 	#epstopdf /tmp/$*.eps
