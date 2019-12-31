@@ -8,7 +8,6 @@
 \\usepackage{amsmath} \
 \\usepackage{amssymb} \
 \\usepackage{color} \
-\\input{local_packages} \
 \\begin{document} \
 \\sffamily \
 \\def\\normalfont{\\sffamily} \
@@ -19,7 +18,4 @@
 \\end{document} \
 EOF > /tmp/$*_raw.log
 	pdfcrop /tmp/$*_raw.pdf /tmp/$*_crop.pdf >> /tmp/$*_raw.log
-	#dvips /tmp/$*.dvi -o /tmp/$*.ps
-	#ps2eps --loose < /tmp/$*.ps > /tmp/$*.eps
-	#epstopdf /tmp/$*.eps
 	mv /tmp/$*_crop.pdf $*.pdf
