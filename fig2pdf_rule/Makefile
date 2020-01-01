@@ -3,7 +3,7 @@
 	fig2dev -L pdftex $*.fig > /tmp/$*.pdf
 	fig2dev -L pdftex_t -f sf -p /tmp/$*.pdf $< > /tmp/$*.tex
 	pdflatex  -halt-on-error -output-directory /tmp -jobname $*_raw << EOF \
-\\documentclass[portrait,a2,final]{a0poster} \
+\\documentclass[portrait,a0,final]{a0poster} \
 \\usepackage{epsfig} \
 \\usepackage{amsmath} \
 \\usepackage{amssymb} \
