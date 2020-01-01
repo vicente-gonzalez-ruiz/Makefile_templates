@@ -2,16 +2,22 @@ default:	all
 .PHONY: clean all mrproper
 #include $(ROOT)/Makefile_templates/*_rule/Makefile
 #include *_rule/Makefile
-include $(MAKEFILE_TEMPLATES)/*_rule/Makefile
+#include $(MAKEFILE_TEMPLATES)/*_rule/Makefile
+include $(MAKEFILE_TEMPLATES)/gpt2fig_rule/Makefile
+include $(MAKEFILE_TEMPLATES)/fig2pdf_rule/Makefile
+include $(MAKEFILE_TEMPLATES)/tex2pdf_rule/Makefile
+include $(MAKEFILE_TEMPLATES)/pdf2svg_rule/Makefile
 
 # Original files
 FIGs := $(wildcard *.fig)
 TEXs := $(wildcard *.tex)
 GPTs := $(wildcard *.gpt)
 Ms   := $(wildcard *.m)
+PYs  := $(wildcard *.py)
 
 # Temporal files
 DATs += $(Ms:%.m=%.dat)
+DATs += $(PYs:%.py=%.dat)
 TMPs += $(DATs)
 
 #EPSs += $(FIGs:%.fig=%.eps)
@@ -40,8 +46,13 @@ TMPs += $(TFIGs)
 #TARs += $(TFIGs:%.fig=%.png)
 #TARs += $(TEXs:%.tex=%.png)
 
-PNGs += $(PDFs:%.pdf=%.png)
-TARs += $(PNGs)
+#PNGs += $(PDFs:%.pdf=%.png)
+#TARs += $(PNGs)
+
+SVGs += $(PDFs:%.pdf=%.svg)
+TARs += $(SVGs)
+
+temporal:	$(TMPs)
 
 all:	$(TMPs) $(TARs)
 
