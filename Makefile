@@ -7,6 +7,7 @@ include $(MAKEFILE_TEMPLATES)/gpt2fig_rule/Makefile
 include $(MAKEFILE_TEMPLATES)/fig2pdf_rule/Makefile
 include $(MAKEFILE_TEMPLATES)/tex2pdf_rule/Makefile
 include $(MAKEFILE_TEMPLATES)/pdf2svg_rule/Makefile
+#include $(MAKEFILE_TEMPLATES)/svg2pdf_rule/Makefile
 
 # Original files
 FIGs := $(wildcard *.fig)
@@ -14,6 +15,7 @@ TEXs := $(wildcard *.tex)
 GPTs := $(wildcard *.gpt)
 Ms   := $(wildcard *.m)
 PYs  := $(wildcard *.py)
+NOTEBOOKs  := $(wildcard *.ipynb)
 
 # Temporal files
 DATs += $(Ms:%.m=%.dat)
@@ -54,13 +56,14 @@ TARs += $(SVGs)
 
 temporal:	$(TMPs)
 
-all:	$(TMPs) $(TARs)
+#all:	$(TMPs) $(TARs)
+all:	$(TARs)
 
 clean:
 	rm -f $(TMPs) *.log *.aux
 
 mrproper:
-	rm -f $(TMPs) $(TARs) *.log *.aux
+	rm -f $(TMPs) $(TARs) *.log *.aux *.nbconvert.ipynb
 
 info:
 	@echo Original files: $(FIGs) $(TEXs) $(GPTs)
